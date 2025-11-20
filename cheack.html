@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Creations...</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    .b-gcolor {
+      width: 100%;
+      height: 100vh;
+      background: linear-gradient(270deg, #ff00cc, #3333ff, #6600ff, #ff33aa);
+      background-size: 400% 400%;
+      animation: bgAnimate 8s ease infinite;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    @keyframes bgAnimate {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    h1 {
+      color: white;
+      text-align: center;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.4);
+    }
+
+    form {
+      width: 90%;
+      max-width: 400px;
+      background-color: rgba(58, 52, 52, 0.15);
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    label {
+      color: #fff;
+      display: block;
+      margin: 10px 0 5px;
+      text-align: left;
+      font-weight: bold;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      outline: none;
+      transition: box-shadow 0.3s ease;
+    }
+
+    input[type="email"]:focus,
+    input[type="password"]:focus {
+      box-shadow: 0 0 8px #fff;
+    }
+
+    input[type="submit"] {
+      color: white;
+      background-color: #5d3578;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      font-size: 16px;
+      width: 100px;
+    }
+
+    input[type="submit"]:hover {
+      background-color: rgb(75, 60, 85);
+      transform: scale(1.08);
+    }
+
+    input[type="submit"]:active {
+      background-color: rgb(135, 86, 190);
+      transform: scale(0.95);
+    }
+
+    .error {
+      color: #ffb6c1;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid #fff;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin-top: 10px;
+      font-size: 15px;
+      display: none;
+    }
+
+    @media (max-width: 480px) {
+      form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="b-gcolor">
+    <h1>Welcome to MehranCreations</h1>
+
+    <form id="myForm">
+      <label for="email">Email:</label>
+      <input id="email" type="email" placeholder="e.g. example@gmail.com" required>
+
+      <label for="password">Password:</label>
+      <input id="password" type="password" placeholder="e.g. Password0192!23" required>
+
+      <input type="submit" value="Send">
+      <div class="error" id="errorMsg"></div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('myForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const errorMsg = document.getElementById('errorMsg');
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      let valid = true;
+      let message = '';
+
+      if (!emailInput.value || !passwordInput.value) {
+        valid = false;
+        message = '❗ Please fill out all fields.';
+      } else if (!emailRegex.test(emailInput.value)) {
+        valid = false;
+        message = '❗ Please enter a valid email address.';
+      }
+
+      if (!valid) {
+        errorMsg.textContent = message;
+        errorMsg.style.display = 'block';
+      } else {
+        errorMsg.style.display = 'none';
+        alert('Form submitted successfully!');
+        form.reset();
+      }
+    });
+  </script>
+</body>
+</html>
